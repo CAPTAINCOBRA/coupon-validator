@@ -1,6 +1,16 @@
 Run the command "npm install" inside the root folder to install all the dependencies
 Afterwards, run "npm start" to run the project
 
+This project is deployed here - https://coupon-valor.netlify.app/
+
+
+
+
+
+
+
+
+
 
 
 
