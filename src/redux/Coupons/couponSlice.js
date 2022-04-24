@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   couponValue: 0,
@@ -30,9 +30,7 @@ const couponSlice = createSlice({
       };
     },
   },
-  extraReducers: {
-    //
-  },
+
 });
 
 export const couponSliceAction = couponSlice.actions;

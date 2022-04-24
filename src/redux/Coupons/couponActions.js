@@ -67,7 +67,7 @@ export const createCoupon = () => {
 
 export const fetchAllCoupons = () => {
   return async (dispatch, getState) => {
-    const { serverUrl, allCoupons } = getState().coupon;
+    const { serverUrl } = getState().coupon;
     const url = "/fetchAllCoupons";
     const responseMiniServer = callMyServer(url, "", serverUrl);
 
