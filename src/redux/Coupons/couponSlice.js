@@ -8,7 +8,7 @@ const initialState = {
   couponExpiryDate: "",
   couponType: "flat",
   // serverUrl: "http://localhost:7000/coupons",
-  serverUrl: "https://ek-coupon-server.herokuapp.com/",
+  serverUrl: "https://ek-coupon-server.herokuapp.com/coupons",
   orderValue: 0,
   allCoupons: [],
   couponValidation: {
