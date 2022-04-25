@@ -32,6 +32,8 @@ export const createCoupon = () => {
         data: responseMiniServer.JSONData,
       });
       if (res.status === 200) {
+        dispatch(fetchAllCoupons());
+
         const msg = (
           <CustomToast err={false} msg="Coupon Created Successfully" />
         );
@@ -90,7 +92,7 @@ export const fetchAllCoupons = () => {
       toast.error(msg, {
         className: "ToastErr Toast",
         position: "bottom-left",
-        autoClose: 500000,
+        autoClose: 5000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -127,7 +129,7 @@ export const validateCoupon = () => {
         toast.success(msg, {
           className: "ToastSucc Toast",
           position: "bottom-left",
-          autoClose: 500000,
+          autoClose: 5000,
           hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: true,
