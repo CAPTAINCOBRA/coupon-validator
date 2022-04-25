@@ -286,8 +286,7 @@ const Home = () => {
             key={coupon._id}
             className="text-white d-flex text-decoration-none mx-auto"
           >
-            {" "}
-            {coupon.couponCode}{" "}
+            {coupon.couponCode} - ({coupon.minOrderValue})
           </a>
         ))}
         {/* </div> */}
