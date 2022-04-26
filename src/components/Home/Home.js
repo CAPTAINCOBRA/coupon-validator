@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { couponSliceAction } from "../../redux/Coupons/couponSlice";
 import * as actions from "../../redux/Coupons/couponActions";
+import Loader from "../Loader/Loader";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -291,6 +292,8 @@ const Home = () => {
         ))}
         {/* </div> */}
       </footer>
+
+      {couponData.loader && <Loader backdrop={true} />}
     </div>
   );
 };

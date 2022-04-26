@@ -48,6 +48,19 @@ export const createCoupon = () => {
           draggable: true,
           progress: undefined,
         });
+      } else {
+        const msg = <CustomToast err={true} msg="Coupon Creation Failed" />;
+
+        toast.error(msg, {
+          className: "ToastErr Toast",
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -69,6 +82,7 @@ export const createCoupon = () => {
 
 export const fetchAllCoupons = () => {
   return async (dispatch, getState) => {
+    dispatch(couponSliceAction.updateState({ key: "loader", value: true }));
     const { serverUrl } = getState().coupon;
     const url = "/fetchAllCoupons";
     const responseMiniServer = callMyServer(url, "", serverUrl);
@@ -77,9 +91,35 @@ export const fetchAllCoupons = () => {
       const res = await axios.get(responseMiniServer.url, {
         data: responseMiniServer.JSONData,
       });
-      dispatch(
-        couponSliceAction.updateState({ key: "allCoupons", value: res.data })
-      );
+      if (res.status === 200) {
+        dispatch(
+          couponSliceAction.updateState({ key: "allCoupons", value: res.data })
+        );
+        dispatch(
+          couponSliceAction.updateState({ key: "loader", value: false })
+        );
+      } else {
+        dispatch(
+          couponSliceAction.updateState({ key: "loader", value: false })
+        );
+        const msg = (
+          <CustomToast
+            err={true}
+            msg="Unable to Fetch Coupons. Contact Administrator!"
+          />
+        );
+
+        toast.error(msg, {
+          className: "ToastErr Toast",
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     } catch (error) {
       console.log(error);
       const msg = (
@@ -105,6 +145,7 @@ export const fetchAllCoupons = () => {
 
 export const validateCoupon = () => {
   return async (dispatch, getState) => {
+    dispatch(couponSliceAction.updateState({ key: "loader", value: true }));
     const { serverUrl, discountValue, orderValue } = getState().coupon;
     const url = "/validateCoupon";
     const data = { discountValue, orderValue };
@@ -115,6 +156,10 @@ export const validateCoupon = () => {
         data: responseMiniServer.JSONData,
       });
       if (res.data.status === 200) {
+        dispatch(
+          couponSliceAction.updateState({ key: "loader", value: false })
+        );
+
         dispatch(
           couponSliceAction.updateState({
             key: "couponValidation",
@@ -138,6 +183,10 @@ export const validateCoupon = () => {
         });
       } else {
         dispatch(
+          couponSliceAction.updateState({ key: "loader", value: false })
+        );
+
+        dispatch(
           couponSliceAction.updateState({
             key: "couponValidation",
             value: res.data,
@@ -157,6 +206,8 @@ export const validateCoupon = () => {
         });
       }
     } catch (error) {
+      dispatch(couponSliceAction.updateState({ key: "loader", value: false }));
+
       console.log(error);
       const msg = <CustomToast err={true} msg="Coupon Not Applied" />;
 

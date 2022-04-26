@@ -17,6 +17,7 @@ const initialState = {
     status: "",
   },
   discountValue: "",
+  loader: false,
 };
 
 const couponSlice = createSlice({
@@ -31,7 +32,6 @@ const couponSlice = createSlice({
       };
     },
   },
-
 });
 
 export const couponSliceAction = couponSlice.actions;
